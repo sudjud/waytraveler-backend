@@ -15,7 +15,7 @@ app.use(express.urlencoded({
 app.use(fileUpload())
 app.use(cors());
 app.use(require("./routes/index.js"));
-app.use(express.static('uploads/images'));
+app.use('/uploads/images', express.static('uploads/images'));
 
 const PORT = process.env.PORT || 3000;
 
