@@ -14,13 +14,12 @@ app.use(express.urlencoded({
 }));
 app.use(fileUpload());
 app.use(cors());
-app.use(cors({
-  origin: '*', // Это разрешает все домены. Безопаснее будет указать список доменов.
-  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-  allowedHeaders: 'Content-Type,Authorization'
-}));
 app.use(require("./routes/index.js"));
 app.use('/uploads/images', cors(), express.static('uploads/images'));
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+});
 
 const PORT = process.env.PORT || 3000;
 
