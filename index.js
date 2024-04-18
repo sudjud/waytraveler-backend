@@ -6,6 +6,10 @@ const fileUpload = require('express-fileupload')
 const app = express();
 require('dotenv').config();
 
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+});
 app.use(helmet());
 app.use(express.json());
 app.use(require('morgan')(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
@@ -16,10 +20,6 @@ app.use(fileUpload());
 app.use(cors());
 app.use(require("./routes/index.js"));
 app.use('/uploads/images', cors(), express.static('uploads/images'));
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-  next();
-});
 
 const PORT = process.env.PORT || 3000;
 
