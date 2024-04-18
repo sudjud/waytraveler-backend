@@ -32,10 +32,10 @@ connect(process.env.MONGO_URL, {
   .catch(error => console.log('Ошибка при соединении с сервером:', error));
 
 app.use((req, res, next) => {
-  res.status(404).send('Page not found');
+  res.status(404).send('Страница не найдена');
 });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).send('Что-то поломалось:(');
 });
