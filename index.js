@@ -12,10 +12,10 @@ app.use(require('morgan')(process.env.NODE_ENV === 'development' ? 'dev' : 'comb
 app.use(express.urlencoded({
   extended: true
 }));
-app.use(fileUpload())
+app.use(fileUpload());
 app.use(cors());
 app.use(require("./routes/index.js"));
-app.use('/uploads/images', express.static('uploads/images'));
+app.use('/uploads/images', cors(), express.static('uploads/images'));
 
 const PORT = process.env.PORT || 3000;
 
